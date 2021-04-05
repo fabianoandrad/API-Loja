@@ -31,6 +31,7 @@ mongoose
     console.log("Falha ao conectar com o BD MongoDB");
   });
 
+  // Envia os produtos ao front-end
 app.get("/home", async (req, res) => {
   await Product.find({}).then((product) => {
     //console.log(budget)
@@ -47,39 +48,39 @@ app.get("/home", async (req, res) => {
 
 });
 
-//Cadastrar informações da Home em db
-app.post("/home", async (req, res) => {
-  const dados = {
-    topTitle: "Temos a solução para sua empresa",
-    topSubTitle: "Aqui vc vai encontrar o que precisa",
-  };
+// //Cadastrar informações da Home em db caso queira deixar a pagina home ser alterada pelas informações do BD
+// app.post("/home", async (req, res) => {
+//   const dados = {
+//     topTitle: "Temos a solução para sua empresa",
+//     topSubTitle: "Aqui vc vai encontrar o que precisa",
+//   };
 
-  // Verificar se já existe dados da Home na db
-  const homeExist = await Home.findOne({});
-  if (homeExist) {
-    return res.status(400).json({
-      error: true,
-      message: "Erro ao cadastrar, página já existe registro na db!",
-    });
-  }
+//   // Verificar se já existe dados da Home na db
+//   const homeExist = await Home.findOne({});
+//   if (homeExist) {
+//     return res.status(400).json({
+//       error: true,
+//       message: "Erro ao cadastrar, página já existe registro na db!",
+//     });
+//   }
 
-  // Salvar os dados na db mongodb
-  await Home.create(dados, (error) => {
-    if (error) {
-      return res.status(400).json({
-        error: true,
-        message: "Erro ao tentar cadastrar",
-      });
-    }
-    return res.json({
-      error: false,
-      message: "Cadastrado com sucesso!",
-    });
-  });
-});
+//   // Salvar os dados na db mongodb
+//   await Home.create(dados, (error) => {
+//     if (error) {
+//       return res.status(400).json({
+//         error: true,
+//         message: "Erro ao tentar cadastrar",
+//       });
+//     }
+//     return res.json({
+//       error: false,
+//       message: "Cadastrado com sucesso!",
+//     });
+//   });
+// });
 
 
-//Cadastrar informações do orçamento em db
+//Cadastrar produtos em db
 app.post("/admin", async (req, res) => {
   
     // Salvar os dados na db
